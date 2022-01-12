@@ -1,0 +1,2 @@
+# librerias
+python-telegram-bot
