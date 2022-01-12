@@ -2,6 +2,6 @@ __pycache__/
 *.env
 .vscode
 .ipynb_checkpoints
-**/boot
+**/bot
 *.weights
 pendientes.md
