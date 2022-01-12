@@ -23,9 +23,11 @@ Versión: 0.1 (beta)
 
 ## Get started
 
+Dentro de la carpeta `/bot`:
+
 ``` bash
-    python3 -m venv boot --system-site-packages  # crear un enviroment.
-    source boot/bin/activate  # activar el enviroment.
+    python3 -m venv bot --system-site-packages  # crear un enviroment.
+    source bot/bin/activate  # activar el enviroment.
     pip3 install -r requirements .txt  # instalar las librerias necesarias.
     nano bot.env  # archivo con las variables de entorno.
 ```
