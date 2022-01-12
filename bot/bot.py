@@ -100,7 +100,7 @@ def sensores(update: Update, context: CallbackContext):
 
 	update.message.reply_text(
 		"¿Qué sensor del laboratorio te gustaría consultar?\n\n"
-		"/hambiente \n"
+		"/ambiente \n"
 		"/ocupacion \n"
 		"/ruido"
 	)
@@ -137,8 +137,8 @@ def mensaje(update: Update, context: CallbackContext):
 		update.message.reply_text("La cantidad de argumentos no es la correcto 😫. \n Ej /mensaje Hernan.")
 
 
-def hambiente(update, context):
-	''' Función que define el comando /tempera.'''
+def ambiente(update, context):
+	''' Función que define el comando /ambiente.'''
 
 	# direccion web desde donde solicitaremos la informacion
 	base_url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -204,7 +204,7 @@ def main():
 	dp.add_handler(CommandHandler('acciones', acciones))
 
 	dp.add_handler(CommandHandler('sensores', sensores))
-	dp.add_handler(CommandHandler('hambiente', hambiente))
+	dp.add_handler(CommandHandler('ambiente', ambiente))
 
 	dp.add_handler(CommandHandler('buscar', buscar))
 	dp.add_handler(CommandHandler('mensaje', mensaje))
