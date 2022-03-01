@@ -7,3 +7,4 @@
 - [ ] Definir nomenclatura para etiquetas de commits: [UPDATE], [FIX], etc. Tal vez en `contributing.md`
 - [ ] Definir nomenclatura para etiquetas de Pull Requests: [Ready] Listo para mergear, [WIP-Feedback] En proceso, se requieren comentarios, [WIP-Ignore] En proceso, ignorar
 - [ ] Mover el contenido de `sugerencias.md` a tarjetas dentro de Github Projects
+- [ ] Cambiar el nombre de la rama `master` a `main`
