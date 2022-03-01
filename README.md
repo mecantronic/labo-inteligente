@@ -6,7 +6,7 @@ Resositorio con la documentación de los servicio que vayamos desarrollando.
 
 * [Bot Telegram](/bot/README.md)
 
-## Declaración del servicio
+## Declaración del servicio en linux
 
 ``` bash
 [Unit]
@@ -28,6 +28,8 @@ Ejecutandolo via ssh
 ``` bash
 ssh -i "<path del archivo *.pem>" <usuario>@<IP_server> -f "<instrucciones de bash separadas por ';'>"
 ```
+
+ssh <usuario>@<IP_server> -f "cd labo_inteligente/; python3 bot/bot.py"
 
 ## Referencias
 
