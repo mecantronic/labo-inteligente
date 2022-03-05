@@ -43,3 +43,33 @@ Como script desde terminal.
 
 Usando las siguientes [instrucciones](https://gist.github.com/maxiyommi/6c3635f076cbeba8c563c4aa3e08589a)
 [Correr script de python como servicio en linux](http://chips.mecatronium.com/tutorial-como-correr-un-script-de-python-al-iniciar-el-raspberry-pi/)
+
+## Declaración del servicio en linux
+
+``` bash
+[Unit]
+Description=Servicio Telegram Bot
+After=multi-user.target
+
+[Service]
+Type=simple
+User=pi
+ExecStart=/usr/bin/python3.7 /home/pi/labo_inteligente/bot/bot.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Ejecutandolo via ssh
+
+``` bash
+ssh -i "<path del archivo *.pem>" <usuario>@<IP_server> -f "<instrucciones de bash separadas por ';'>"
+```
+
+ssh <usuario>@<IP_server> -f "cd labo_inteligente/; python3 bot/bot.py"
+
+## Referencias
+
+* [Repo instalación de la EspCam32](https://github.com/martuan/esp-ia)
+* [Script de pYthon como servicio en Linux](http://chips.mecatronium.com/tutorial-como-correr-un-script-de-python-al-iniciar-el-raspberry-pi/)
