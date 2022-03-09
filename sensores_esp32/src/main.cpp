@@ -19,4 +19,5 @@ void loop() {
   delay(1000);
   //printScreen();
   pepe();
+  delay(500);//linea agregada por Martín
 }
