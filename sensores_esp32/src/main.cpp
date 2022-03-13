@@ -1,4 +1,4 @@
-#include <toggleLED.h>
+//#include <toggleLED.h>
 #include <comunicacion.h>
 #include <EEPROM.h>
 
@@ -17,12 +17,14 @@ void setup() {
 
   // Access attributes and set values
   sensorTemp.value = 25.0;
-  sensorTemp.SSID = "infiniem";  
-  sensorTemp.Password = "12345678";
+  //sensorTemp.SSID = "infiniem";
+  sensorTemp.SSID = "milton";    
+  //sensorTemp.Password = "12345678";
+  sensorTemp.Password = "paternal";
   sensorTemp.descriptor = "Mide temperatura, humedad y presion";
   sensorTemp.url_broker = "broker.hivemq.com";
   sensorTemp.id = "sensorTemp_0001";
-  sensorTemp.topic = "/labo_inteligente/temperatura/"+ sensorTemp.id;  
+  sensorTemp.topic = "labo_inteligente/temperatura/"+ sensorTemp.id;  
   
   // Print attribute values
   Serial.println(sensorTemp.value);
@@ -37,9 +39,10 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  client1.loop();
+  conexion.loop();
   delay(3000);
   conexion.publicarData((long)sensorTemp.value);
+  Serial.println("publica ");
   /*
   toggleLED();
   delay(1000);

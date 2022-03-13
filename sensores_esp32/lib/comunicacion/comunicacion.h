@@ -4,13 +4,12 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
+//#ifndef SerialBT
+  
+//#endif
+  
 
-BluetoothSerial SerialBT;
-char flagConexionOK = 0;
-WiFiClient espClient1;
-PubSubClient client1(espClient1);
-String clientId = "";
-char cantFallos = 0;
+  
 
 class Sensores {       // The class
   public:             // Access specifier
@@ -27,6 +26,12 @@ class Sensores {       // The class
 
 class Network {
 
+
+  char flagConexionOK = 0;
+
+  String clientId = "";
+  char cantFallos = 0;
+
   char mqtt_server[100] = {};//server
   char root_topic_subscribe[100] = {};//topic subscriber
   char root_topic_publish[100] = {};//topic publisher
@@ -41,6 +46,7 @@ class Network {
     void callback(char*, byte*, unsigned int);
     //void callback(char* topic, byte* payload, unsigned int length);
     void publicarData(long);
+    void loop(void);
 
 
 };

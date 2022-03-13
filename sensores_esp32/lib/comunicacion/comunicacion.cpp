@@ -2,7 +2,10 @@
 
 #define LED_ONBOARD 2
 
-
+//Network call;
+BluetoothSerial SerialBT;
+WiFiClient espClient1;
+PubSubClient client1(espClient1);
 
 
 void Network::setup_wifi(String ssid, String password){
@@ -51,7 +54,7 @@ void Network::callback(char* topic, byte* payload, unsigned int length){
   String incoming = "";
   char charParamID = ' ';
   String valorParam = "";
-  int inChar = 0;
+  //int inChar = 0;
   
   
 
@@ -98,7 +101,7 @@ void Network::callback(char* topic, byte* payload, unsigned int length){
 
 void Network::setup_mqtt(String broker, String topic){
 
-
+    //callback call = callback();
 
     
     strcpy(mqtt_server, broker.c_str());
@@ -129,29 +132,29 @@ void Network::setup_mqtt(String broker, String topic){
 
     client1.setServer(mqtt_server, mqtt_port);//inicializa server en broker local
 	//client1.setServer("broker.hivemq.com", mqtt_port);//inicializa server en broker local
-	client1.setCallback(callback);
+    //client1.setCallback(callback);
 
-	//intenta conectar con MQTT
-	if(!client1.connected()){
-		reconnect();//si no está conectado, lo reconecta
-	}
-	if(client1.connected()){//si logró reconectarse o ya estaba conectado
-		Serial.println("Conexión OK: Wifi y MQTT conectados");
-		Serial.println("MODO RED");
-        SerialBT.println("Conexión OK: Wifi y MQTT conectados");
-		SerialBT.println("MODO RED");
-		//flagCambioModoLocal = 0;//no hace falta cambiar a modo local
-		flagConexionOK = 1;
-		
-	}else{
-		Serial.println("Conexión Errónea: Wifi y MQTT no conectados");
-		Serial.println("MODO LOCAL...(temporal)");
-        SerialBT.println("Conexión Errónea: Wifi y MQTT no conectados");
-		SerialBT.println("MODO LOCAL...(temporal)");
-		//flagCambioModoLocal = 1;
-		//flagModoRed = 0;
-		flagConexionOK = 0;
-	}
+    //intenta conectar con MQTT
+    if(!client1.connected()){
+      reconnect();//si no está conectado, lo reconecta
+    }
+    if(client1.connected()){//si logró reconectarse o ya estaba conectado
+      Serial.println("Conexión OK: Wifi y MQTT conectados");
+      Serial.println("MODO RED");
+          SerialBT.println("Conexión OK: Wifi y MQTT conectados");
+      SerialBT.println("MODO RED");
+      //flagCambioModoLocal = 0;//no hace falta cambiar a modo local
+      flagConexionOK = 1;
+      
+    }else{
+      Serial.println("Conexión Errónea: Wifi y MQTT no conectados");
+      Serial.println("MODO LOCAL...(temporal)");
+          SerialBT.println("Conexión Errónea: Wifi y MQTT no conectados");
+      SerialBT.println("MODO LOCAL...(temporal)");
+      //flagCambioModoLocal = 1;
+      //flagModoRed = 0;
+      flagConexionOK = 0;
+    }
 
 
 }
@@ -223,15 +226,15 @@ void Network::reconnect(void) {
 void Network::publicarData(long dato){
 
 
-/*
+
 //***************VER de convertir a JSON 6 ******************
 
 	// ArduinoJson 6
-	DynamicJsonDocument doc(1024);
-	doc["key"] = "value";
-	doc["raw"] = serialized("[1,2,3]");
-	serializeJson(doc, Serial);
-*/
+	// DynamicJsonDocument doc(1024);
+	// doc["key"] = "value";
+	// doc["raw"] = serialized("[1,2,3]");
+	// serializeJson(doc, Serial);
+
 
         
   //prepara el objeto JSON para publicar por MQTT
@@ -250,5 +253,11 @@ void Network::publicarData(long dato){
   //client1.publish(root_topic_publish, JSONmessageBuffer);
   client1.publish(root_topic_publish, "25.00");
 
+
+}
+
+void Network::loop(void){
+
+  client1.loop();
 
 }
