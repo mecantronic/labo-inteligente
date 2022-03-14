@@ -1,15 +1,15 @@
 # Pull Request Template
 
-## Etiquetas para el título del Pull Request
-* [Ready] Listo para mergear, pero necesita se revisado  
-* [WIP-Feedback] En desarrollo, se requieren comentarios  
-* [WIP-Ignore] En desarrollo, ignorar
-
-Ejemplo de título: `[WIP-Feedback] Conexión Bluetooth BLE`
-
+## Etiquetas para el Pull Request
+Agregar a cada Pull Request (PR) una etiqueta descriptiva, además de un título claro y conciso
+* **ready for review** -- listo para mergear, pero necesita se revisión
+* **help wanted** -- en desarrollo, se se requiere ayuda
+* <sin etiqueta> -- Ignorar
 
 ## Descripción
-Resumen de funcionamiento de la feature. Contexto. Documentación relacionada.
+Resumen de funcionamiento de la feature.
+Contexto.
+Documentación relacionada (enlaces).
 
 Relacionado con # (issue)
 
