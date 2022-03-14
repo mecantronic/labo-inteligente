@@ -8,7 +8,7 @@
   git checkout <local_branch>
   git merge develop
   ```
-* Recordá realizar push de tu código a la rama que creaste. EVITÁ REALIZAR PUSH DIRECTAMENTE A LA RAMA DEVELOP O A MASTER
+* Recordá realizar push de tu código a la rama que creaste. EVITÁ REALIZAR PUSH DIRECTAMENTE A LA RAMA DEVELOP O A MASTER/MAIN
 
 Enlaces adicionales:
 https://docs.google.com/presentation/d/1uC4vF8jFkpqOZ23hXQFJVnZPfnTCZgvqXFlYv8x6j2Y/edit#slide=id.g118b171e085_0_34
