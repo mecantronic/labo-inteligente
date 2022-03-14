@@ -16,7 +16,7 @@ https://www.notion.so/Git-y-GitHub-57819f890e924ad2bc7217f772cab900#8315411b2ae3
 
 # Creación de un Pull Request
 * IMPORTANTE: antes de realizar un Pull Request, por favor solucioná todos los conflictos y probá manualmente todas las funcionalidades de la nueva branch.
-* Utilizá este [template](https://github.com/maxiyommi/labo_inteligente/blob/patch/create-pull-request-template/docs/pull_request_template.md) para crear tu PR. En breve lo vamos a configurar para que el template se muestre automáticamente.
+* Cuando realices el PR, te va a aparecer un template para que leas y completes.
 * Considerá como una posibilidad, [realizar un rebase interactivo y squash](https://dev.to/amalv/a-cleaner-github-workflow-one-commit-per-pull-pequest-3ic1), para mantener el historial de commits lo más acotado posible.
 * Realizá tus Pull Request desde la rama `branch` apuntando hacia la rama `develop`
 
