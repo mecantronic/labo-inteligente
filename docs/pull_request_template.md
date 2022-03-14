@@ -4,7 +4,7 @@
 Agregar a cada Pull Request (PR) una etiqueta descriptiva, además de un título claro y conciso
 * **ready for review** -- listo para mergear, pero necesita se revisión
 * **help wanted** -- en desarrollo, se se requiere ayuda
-* <sin etiqueta> -- Ignorar
+* (sin etiqueta) -- Ignorar
 
 ## Descripción
 Resumen de funcionamiento de la feature.
