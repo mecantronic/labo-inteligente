@@ -38,6 +38,7 @@ Por favor describí los tests que realizaste para vericar el comportamiento de e
 
 ## Checklist:
 
+
 Por favor, borrá las opciones que no correspondan
 
 - He realizado la revisión de mi propio código, siguiendo el estilo estándar del proyecto
