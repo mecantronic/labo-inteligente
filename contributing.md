@@ -12,7 +12,6 @@
 
 Enlaces adicionales:
 https://docs.google.com/presentation/d/1uC4vF8jFkpqOZ23hXQFJVnZPfnTCZgvqXFlYv8x6j2Y/edit#slide=id.g118b171e085_0_34
-https://www.notion.so/Git-y-GitHub-57819f890e924ad2bc7217f772cab900#8315411b2ae343d6a08e540c3d40a85d
 
 # Creación de un Pull Request
 * IMPORTANTE: antes de realizar un Pull Request, por favor solucioná todos los conflictos y probá manualmente todas las funcionalidades de la nueva branch.
