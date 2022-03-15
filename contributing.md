@@ -1,7 +1,23 @@
-# Describir workflow
+# Seguí este workflow para crear ramas y realizar pruebas locales
+* realizá branches desde `develop`, con la siguiente nomenclatura:
+    * config/branch_name: configuraciones que irán en los periféricos
+    * service/branch_name: servicios que irán en el server
+* Luego finalizado el código de la nueva branch, realizá las pruebas de funcionamiento en el contexto del proyecto actualizado, siguiendo los siguientes pasos:
+  ```
+  git pull
+  git checkout <local_branch>
+  git merge develop
+  ```
+* Recordá realizar push de tu código a la rama que creaste. EVITÁ REALIZAR PUSH DIRECTAMENTE A LA RAMA DEVELOP O A MASTER / MAIN
 
-# Describir proceso de PR
+Enlaces adicionales:
+https://docs.google.com/presentation/d/1uC4vF8jFkpqOZ23hXQFJVnZPfnTCZgvqXFlYv8x6j2Y/edit#slide=id.g118b171e085_0_34
 
+# Creación de un Pull Request
+* IMPORTANTE: antes de realizar un Pull Request, por favor solucioná todos los conflictos y probá manualmente todas las funcionalidades de la nueva branch.
+* Cuando realices el PR, te va a aparecer un template para que leas y completes.
+* Considerá como una posibilidad, [realizar un rebase interactivo y squash](https://dev.to/amalv/a-cleaner-github-workflow-one-commit-per-pull-pequest-3ic1), para mantener el historial de commits lo más acotado posible.
+* Realizá tus Pull Request desde la rama `branch` apuntando hacia la rama `develop`
 
 
 # Nomenclatura de commits
