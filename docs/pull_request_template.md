@@ -33,7 +33,9 @@ Por favor describí los tests que realizaste para vericar el comportamiento de e
 
 ## Checklist:
 
-- [ ] He realizado la revisión de mi propio código, siguiendo el estilo estándar del proyecto
-- [ ] He comentado mi código, particularmente en las secciones más complejas
-- [ ] He realizado / pedido los cambios de documentación correspondientes
-- [ ] Los cambios que propongo no producen nuevos Warnings
+Por favor, borrá las opciones que no correspondan
+
+- He realizado la revisión de mi propio código, siguiendo el estilo estándar del proyecto
+- He comentado mi código, particularmente en las secciones más complejas
+- He realizado / pedido los cambios de documentación correspondientes
+- Los cambios que propongo no producen nuevos Warnings
