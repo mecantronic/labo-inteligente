@@ -45,7 +45,7 @@ class Network {
     void reconnect(void);
     void callback(char*, byte*, unsigned int);
     //void callback(char* topic, byte* payload, unsigned int length);
-    void publicarData(long);
+    void publicarData(float);
     void loop(void);
 
 

@@ -223,7 +223,7 @@ void Network::reconnect(void) {
 }
 
 
-void Network::publicarData(long dato){
+void Network::publicarData(float dato){
 
 
 
@@ -239,7 +239,7 @@ void Network::publicarData(long dato){
         
   //prepara el objeto JSON para publicar por MQTT
   //StaticJsonBuffer<300> JSONbuffer;
-  StaticJsonDocument<300> JSONbuffer;
+  //StaticJsonDocument<300> JSONbuffer;
   //JsonObject JSONencoder = JSONbuffer.createObject();
  
   //JSONencoder["dato"] = round(dato * 100) / 100;
@@ -251,7 +251,23 @@ void Network::publicarData(long dato){
   //WebSerial.println(JSONmessageBuffer);
 */
   //client1.publish(root_topic_publish, JSONmessageBuffer);
-  client1.publish(root_topic_publish, "25.00");
+  //client1.publish(root_topic_publish, "25.00");
+
+	// ArduinoJson 6
+	DynamicJsonDocument doc(1024);
+	String docSerializado = {};
+	      
+	//prepara el objeto JSON para publicar por MQTT
+	doc["dato"] = round(dato * 100) / 100;
+	serializeJson(doc, docSerializado);//le da formato JSON  
+	Serial.println("Enviando data por MQTT1...");
+
+	Serial.println(docSerializado);
+	 //WebSerial.println(docSerializado);
+
+	client1.publish(root_topic_publish, docSerializado.c_str());
+
+
 
 
 }

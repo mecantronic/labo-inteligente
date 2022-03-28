@@ -1,6 +1,11 @@
 //#include <toggleLED.h>
 #include <comunicacion.h>
 #include <EEPROM.h>
+#include <DHT.h>
+
+#define DHTPIN 33    // Digital pin connected to the DHT sensor
+#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+DHT dht(DHTPIN, DHTTYPE);// Initialize DHT sensor.
 
 
 Network conexion;
@@ -12,15 +17,19 @@ void setup() {
   //delay(10000);
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(DHTPIN, INPUT);
+  dht.begin();
   
   
 
   // Access attributes and set values
   sensorTemp.value = 25.0;
   //sensorTemp.SSID = "infiniem";
-  sensorTemp.SSID = "milton";    
+  //sensorTemp.SSID = "milton";    
+  sensorTemp.SSID = "wifi01-ei";    
   //sensorTemp.Password = "12345678";
-  sensorTemp.Password = "paternal";
+  //sensorTemp.Password = "paternal";
+  sensorTemp.Password = "Ax32MnF1975-ReB";
   sensorTemp.descriptor = "Mide temperatura, humedad y presion";
   sensorTemp.url_broker = "broker.hivemq.com";
   sensorTemp.id = "sensorTemp_0001";
@@ -41,7 +50,10 @@ void loop() {
 
   conexion.loop();
   delay(3000);
-  conexion.publicarData((long)sensorTemp.value);
+  sensorTemp.value = dht.readTemperature();
+  Serial.println(dht.readTemperature());
+
+  conexion.publicarData(sensorTemp.value);
   Serial.println("publica ");
   /*
   toggleLED();
