@@ -10,12 +10,14 @@ DHT dht(DHTPIN, DHTTYPE);// Initialize DHT sensor.
 
 Network conexion;
 Sensores sensorTemp;  // Create an object
+
 //void toggleLED(void);
 
 void setup() {
   // put your main code here, to run repeatedly:
   //delay(10000);
   Serial.begin(115200);
+  conexion.setup_bluetooth();
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(DHTPIN, INPUT);
   dht.begin();
@@ -48,13 +50,21 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  bool resultadoPub = 0;
+
   conexion.loop();
   delay(3000);
   sensorTemp.value = dht.readTemperature();
   Serial.println(dht.readTemperature());
 
-  conexion.publicarData(sensorTemp.value);
+  resultadoPub = conexion.publicarData(sensorTemp.value);
+  Serial.print("Resultado de la publicación: ");
+  Serial.println(resultadoPub);
   Serial.println("publica ");
+  conexion.serialBTprintln("publica");
+  conexion.serialBTprint("hola ");
+  conexion.serialBTprint("mundo");
+  conexion.serialBTprintln("");
   /*
   toggleLED();
   delay(1000);

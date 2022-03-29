@@ -45,8 +45,12 @@ class Network {
     void reconnect(void);
     void callback(char*, byte*, unsigned int);
     //void callback(char* topic, byte* payload, unsigned int length);
-    void publicarData(float);
+    bool publicarData(float);
     void loop(void);
+	void setup_bluetooth(void);
+	void serialBTprint(String);
+	void serialBTprintln(String);
+	
 
 
 };

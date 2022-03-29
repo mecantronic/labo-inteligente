@@ -223,7 +223,7 @@ void Network::reconnect(void) {
 }
 
 
-void Network::publicarData(float dato){
+bool Network::publicarData(float dato){
 
 
 
@@ -252,6 +252,7 @@ void Network::publicarData(float dato){
 */
   //client1.publish(root_topic_publish, JSONmessageBuffer);
   //client1.publish(root_topic_publish, "25.00");
+	bool pubOK = 0;
 
 	// ArduinoJson 6
 	DynamicJsonDocument doc(1024);
@@ -265,8 +266,8 @@ void Network::publicarData(float dato){
 	Serial.println(docSerializado);
 	 //WebSerial.println(docSerializado);
 
-	client1.publish(root_topic_publish, docSerializado.c_str());
-
+	pubOK = client1.publish(root_topic_publish, docSerializado.c_str());
+	return pubOK;
 
 
 
@@ -276,4 +277,24 @@ void Network::loop(void){
 
   client1.loop();
 
+}
+
+void Network::setup_bluetooth(void){
+
+	SerialBT.begin();
+	SerialBT.println("Bluetooth service has started");
+
+
+}
+
+void Network::serialBTprint(String str){
+
+	SerialBT.print(str);
+
+}
+
+void Network::serialBTprintln(String str){
+
+	SerialBT.println(str);
+	
 }
