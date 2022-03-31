@@ -6,6 +6,7 @@
 BluetoothSerial SerialBT;
 WiFiClient espClient1;
 PubSubClient client1(espClient1);
+//Sensores sensor1;
 
 
 void Network::setup_wifi(String ssid, String password){
@@ -225,33 +226,6 @@ void Network::reconnect(void) {
 
 bool Network::publicarData(float dato){
 
-
-
-//***************VER de convertir a JSON 6 ******************
-
-	// ArduinoJson 6
-	// DynamicJsonDocument doc(1024);
-	// doc["key"] = "value";
-	// doc["raw"] = serialized("[1,2,3]");
-	// serializeJson(doc, Serial);
-
-
-        
-  //prepara el objeto JSON para publicar por MQTT
-  //StaticJsonBuffer<300> JSONbuffer;
-  //StaticJsonDocument<300> JSONbuffer;
-  //JsonObject JSONencoder = JSONbuffer.createObject();
- 
-  //JSONencoder["dato"] = round(dato * 100) / 100;
-  /*
-  char JSONmessageBuffer[300];
-  JSONencoder.printTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
-  Serial.println("Enviando data por MQTT1...");
-  Serial.println(JSONmessageBuffer);
-  //WebSerial.println(JSONmessageBuffer);
-*/
-  //client1.publish(root_topic_publish, JSONmessageBuffer);
-  //client1.publish(root_topic_publish, "25.00");
 	bool pubOK = 0;
 
 	// ArduinoJson 6
@@ -264,9 +238,14 @@ bool Network::publicarData(float dato){
 	Serial.println("Enviando data por MQTT1...");
 
 	Serial.println(docSerializado);
-	 //WebSerial.println(docSerializado);
 
 	pubOK = client1.publish(root_topic_publish, docSerializado.c_str());
+
+	if(pubOK == 0){//si falló la publicación lo contabiliza
+		cantDeFallasMQTT++;
+	}
+
+
 	return pubOK;
 
 
@@ -297,4 +276,142 @@ void Network::serialBTprintln(String str){
 
 	SerialBT.println(str);
 	
+}
+/*
+int Network::contadorDeFallasMQTT(bool pubOK){
+	if(pubOK == 0){
+		cantDeFallasMQTT++;
+	}
+	return cantDeFallasMQTT;
+}
+*/
+
+void Network::comprobarConexion(String ssid,String pass,String broker,String topic){
+
+  setupModoRed(ssid,pass,broker,topic);//configura MQTT, revisa conectividad
+ 
+}
+
+void Network::setupModoRed(String ssid,String pass,String broker,String topic){
+
+	Network::setup_wifi(ssid,pass);
+	Network::setup_mqtt(broker,topic);
+
+}
+
+void Network::switchCaseParametros(char charParamID, String valorParam){
+
+  int inChar = 0;
+  int index = 0;
+  int valorParamLength = 0;
+  int endIndex = 0;
+  int modoDebug = 0;
+  int consultarLecturas = 0;
+  int correccionActivada = 0;
+  uint8_t numSensor = 0;
+  uint16_t direccion = 0;
+  int scanActivado = 0;
+  byte oldAddress = 0;
+  byte newAddress = 0;
+  int analizarLecturasCantidad = 0;
+  int intercambioSensores = 0;
+  int color = 0;
+  String nombreSensor = "";
+  String ssid = "";
+  String password = "";
+  
+  //valorParam = 
+  valorParam.replace(0x0A,'\0');//Se filtra el caracter LF
+  valorParam.replace(0x0D,'\0');//Se filtra el caracter CR
+
+  switch(charParamID){
+   
+    case 'W':
+
+      Serial.println("Wifi: ");
+      valorParamLength = strlen(valorParam.c_str());
+      endIndex = valorParamLength;
+      index = valorParam.indexOf(' ');
+      ssid = valorParam.substring(0, index);
+      Serial.println(ssid);
+      //password = valorParam.substring(index + 1, endIndex - 1);
+      password = valorParam.substring(index + 1, endIndex);
+      Serial.println(password);
+      /*
+	  //guarda config wifi en EEPROM
+      EEPROM.writeString(EEPROM_ADDRESS_WIFI_SSID, ssid);
+      EEPROM.commit();
+      EEPROM.writeString(EEPROM_ADDRESS_WIFI_PASS, password);
+      EEPROM.commit();
+	  */
+      setup_wifi(ssid, password);
+
+    break;
+   
+    default:
+      Serial.println("Parámetro incorrecto");
+    break;
+
+  }  
+}
+
+//puede cambiar parámetros a través del puerto serie o por bluetooth
+//Se debe enviar un caracter de identificación del parámetro a cambiar y
+//luego el valor.
+//Por ejemplo: cambiar el tiempo entre lecturas de temperatura
+//enviar T100  siendo T: tiempoEntreLecturas; 100: 100 ms
+//los parámetros que se pueden modificar son:
+//  Wifi--> W;  [Ejemplo: Wmyssid mypassword](El espacio se usa como delimitador)
+void Network::cambioDeParametros(void){
+
+  char charParamID = ' ';
+  String valorParam = "";
+  int inChar = 0;
+  String inString = "";
+    
+  
+  //**** Chequeo por Serie o Bluetooth ***************
+  while (Serial.available() > 0 || SerialBT.available() > 0) {
+
+    if(Serial.available() > 0){
+      inChar = Serial.read();
+    }else if(SerialBT.available() > 0){
+      inChar = SerialBT.read();
+    }
+    
+
+    if(inChar != '\n'){
+      Serial.print((char)inChar);
+
+      inString += (char)inChar;//encola los caracteres recibidos
+
+    }else{//si llegó el caracter de terminación
+      
+      Serial.print("Input string: ");
+      Serial.println(inString);
+      Serial.print("string length: ");
+      Serial.println(inString.length());
+
+
+      //obtiene el identificador
+      charParamID = inString.charAt(0);
+      
+      Serial.println(charParamID);
+      
+      //obtiene el valor
+      for(int i = 1; i < inString.length(); i++){
+        valorParam += inString.charAt(i);
+      }
+
+      Serial.println(valorParam);
+
+      //evalua el identificador y los parámetros enviados
+      switchCaseParametros(charParamID, valorParam);
+      
+      //borra el contenido y lo prepara para recibir uno nuevo
+      inString = "";
+    
+    }
+  }
+
 }

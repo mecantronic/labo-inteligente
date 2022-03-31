@@ -8,8 +8,12 @@
 DHT dht(DHTPIN, DHTTYPE);// Initialize DHT sensor.
 
 
+
 Network conexion;
 Sensores sensorTemp;  // Create an object
+Parametros parametros;
+//Sensores sensor1;
+
 
 //void toggleLED(void);
 
@@ -36,7 +40,14 @@ void setup() {
   sensorTemp.url_broker = "broker.hivemq.com";
   sensorTemp.id = "sensorTemp_0001";
   sensorTemp.topic = "labo_inteligente/temperatura/"+ sensorTemp.id;  
+
+  conexion.ssid = sensorTemp.SSID;
+  conexion.password = sensorTemp.Password;
+
+  //parametros.ssid = "wifi01-ei";
+  //parametros.password = "Ax32MnF1975-ReB";
   
+ 
   // Print attribute values
   Serial.println(sensorTemp.value);
   Serial.println(sensorTemp.SSID);
@@ -51,28 +62,49 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   bool resultadoPub = 0;
+  //int cantFallasMQTT = 0;
 
   conexion.loop();
+
+  conexion.cambioDeParametros();
+
+  
   delay(3000);
   sensorTemp.value = dht.readTemperature();
   Serial.println(dht.readTemperature());
 
   resultadoPub = conexion.publicarData(sensorTemp.value);
+  if(resultadoPub == 0){//si falla la publicación
+	conexion.flagConexionOK = 0;
+  }
+  
   Serial.print("Resultado de la publicación: ");
   Serial.println(resultadoPub);
-  Serial.println("publica ");
-  conexion.serialBTprintln("publica");
-  conexion.serialBTprint("hola ");
-  conexion.serialBTprint("mundo");
-  conexion.serialBTprintln("");
-  /*
-  toggleLED();
-  delay(1000);
-  //printScreen();
-  pepe();
-  delay(500);//linea agregada por Martín
-  */
+  Serial.print("Cantidad de fallas de publicación MQTT: ");
+  Serial.println(conexion.cantDeFallasMQTT);
+  
+
+	if(conexion.flagConexionOK == 0){
+		
+		Serial.println("Intentando recuperar la conexión");
+		//si alguna conexión se perdió, la reestablece
+		conexion.comprobarConexion(conexion.ssid,conexion.password,sensorTemp.url_broker,sensorTemp.topic);
+		
+		if(conexion.flagConexionOK){//si la recuperó
+			Serial.print("Se ha recuperado la conexión. flagConexionOK = ");
+			Serial.println(conexion.flagConexionOK);
+			conexion.publicarData(sensorTemp.value);// y publica
+			Serial.println("publica ");
+  			conexion.serialBTprintln("publica");
+			//contadorReconexionExitosa++;
+		}else{//si no la recuperó
+		
+			Serial.print("[PROBLEMAS] No se ha recuperado la conexión. flagConexionOK = ");
+			Serial.println(conexion.flagConexionOK);
+			//contadorReconexionFallida++;
+		}
 
 
+	}
 
 }

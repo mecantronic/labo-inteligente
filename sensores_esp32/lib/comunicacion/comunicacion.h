@@ -26,9 +26,6 @@ class Sensores {       // The class
 
 class Network {
 
-
-  char flagConexionOK = 0;
-
   String clientId = "";
   char cantFallos = 0;
 
@@ -40,6 +37,12 @@ class Network {
   const char *mqtt_pass = "";//pass
 
   public:
+
+  	int cantDeFallasMQTT = 0;
+	char flagConexionOK = 0;
+	String ssid = "";
+	String password = "";
+
     void setup_wifi(String, String);
     void setup_mqtt(String, String);
     void reconnect(void);
@@ -50,7 +53,19 @@ class Network {
 	void setup_bluetooth(void);
 	void serialBTprint(String);
 	void serialBTprintln(String);
+	void comprobarConexion(String,String,String,String);
+	void setupModoRed(String, String, String, String);
+	//int contadorDeFallasMQTT(bool);
+	void switchCaseParametros(char, String);
+	void cambioDeParametros(void);
 	
 
+
+};
+
+class Parametros {
+	public:
+		String ssid = "";
+		String password = "";
 
 };
