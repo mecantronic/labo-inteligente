@@ -576,3 +576,21 @@
 2022-01-10 05:31:10,636 - __main__ - WARNING - [UPDATE] "None" causa del error "urllib3 HTTPError HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5019690287:AAH9nfL4sWzLiF5Tuza3Jf_DuqiFJZo8qqI/getUpdates (Caused by NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.connection.VerifiedHTTPSConnection object at 0x7f5dcdb04e50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))"
 2022-01-10 05:31:29,932 - telegram.ext.updater - INFO - Received signal 15 (SIGTERM), stopping...
 2022-01-10 05:31:29,958 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2022-04-04 15:35:53,436 - root - INFO - InfiniemBot Iniciado...
+2022-04-04 15:35:53,439 - apscheduler.scheduler - INFO - Scheduler started
+2022-04-04 15:35:55,103 - __main__ - INFO - [UPDATE] Usuario Max consume el servicio /suerte
+2022-04-04 15:35:55,990 - __main__ - INFO - [UPDATE] Usuario Max consume el servicio /suerte
+2022-04-04 15:35:56,401 - __main__ - INFO - [UPDATE] Usuario Max consume el servicio /suerte
+2022-04-04 15:35:56,793 - __main__ - INFO - [UPDATE] Usuario Max consume el servicio /suerte
+2022-04-04 15:35:57,175 - __main__ - INFO - [UPDATE] Usuario Max consume el servicio /suerte
+2022-04-04 15:35:57,550 - __main__ - INFO - [UPDATE] Usuario Max consume el servicio /suerte
+2022-04-04 15:35:57,921 - __main__ - INFO - [UPDATE] Usuario Max consume el servicio /acciones 💡
+2022-04-04 15:35:58,331 - root - INFO - [NEW ACCESS] chat_id : 1211957358 - firstname : Max - lastname : None - username maxi_2022
+2022-04-04 15:35:58,727 - root - INFO - [NEW ACCESS] chat_id : 1211957358 - firstname : Max - lastname : None - username maxi_2022
+2022-04-04 15:35:59,104 - root - INFO - [NEW ACCESS] chat_id : 1211957358 - firstname : Max - lastname : None - username maxi_2022
+2022-04-04 15:35:59,558 - root - INFO - [NEW ACCESS] chat_id : 1211957358 - firstname : Max - lastname : None - username maxi_2022
+2022-04-04 15:35:59,968 - root - INFO - [NEW ACCESS] chat_id : 1211957358 - firstname : Max - lastname : None - username maxi_2022
+2022-04-04 15:36:12,153 - root - INFO - [NEW ACCESS] chat_id : 1211957358 - firstname : Max - lastname : None - username maxi_2022
+2022-04-04 15:36:28,958 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2022-04-04 15:36:28,959 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2022-04-04 15:36:30,430 - telegram.ext.updater - WARNING - Exiting immediately!
