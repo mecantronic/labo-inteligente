@@ -192,8 +192,8 @@ void Network::reconnect(void) {
     Serial.print("resultado: ");
     Serial.print(resultado);
     if(resultado == 1){
-      Serial.println("Conectado!");
-      SerialBT.println("Conectado!");
+      Serial.println(" Conectado!");
+      SerialBT.println(" Conectado!");
       flagConexionOK = 1;
 	  if(client1.subscribe(root_topic_subscribe)){
         Serial.println("Suscripcion ok");
@@ -337,6 +337,9 @@ void Network::switchCaseParametros(char charParamID, String valorParam){
       //password = valorParam.substring(index + 1, endIndex - 1);
       password = valorParam.substring(index + 1, endIndex);
       Serial.println(password);
+	  Network::ssid = ssid;
+	  Network::password = password;
+
       /*
 	  //guarda config wifi en EEPROM
       EEPROM.writeString(EEPROM_ADDRESS_WIFI_SSID, ssid);

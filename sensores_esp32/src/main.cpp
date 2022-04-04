@@ -32,7 +32,7 @@ void setup() {
   sensorTemp.value = 25.0;
   //sensorTemp.SSID = "infiniem";
   //sensorTemp.SSID = "milton";    
-  sensorTemp.SSID = "wifi01-ei";    
+  sensorTemp.SSID = "wifi01-ei";//   Wwifi01-ei Ax32MnF1975-ReB
   //sensorTemp.Password = "12345678";
   //sensorTemp.Password = "paternal";
   sensorTemp.Password = "Ax32MnF1975-ReB";
