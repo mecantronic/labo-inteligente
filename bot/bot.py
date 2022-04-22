@@ -12,7 +12,7 @@ from telegram.ext import (Updater, CommandHandler, CallbackContext, CallbackQuer
 import os
 import logging
 from dotenv import load_dotenv
-import requests, json
+import requests, json, socket
 
 load_dotenv('bot.env')
 token = os.getenv("TOKEN")
@@ -115,7 +115,7 @@ def acciones(update: Update, context: CallbackContext):
 
 	update.message.reply_text(
 		"¿Qué acción del laboratorio te gustaría realizar?\n\n"
-		"/abrir_puerta \n"
+		"/puerta \n"
 		"/prender_luz \n"
 		"/reproducir_musica"
 	)
@@ -135,6 +135,30 @@ def mensaje(update: Update, context: CallbackContext):
 			update.message.reply_text("El usuario {} no esta dentro de mis contactos disponibles 😕.". format(context.args[0]))
 	else:
 		update.message.reply_text("La cantidad de argumentos no es la correcto 😫. \n Ej /mensaje Hernan.")
+
+
+def puerta(update, context):
+	''' Función para abrir la puerta '''
+
+	# Datos del usuario que se conecta
+	chat_id = update.message.chat_id
+
+	if chat_id == int(os.getenv('HERNAN_ID')) or chat_id == int(os.getenv('MAXI_ID')):
+		# Establecemos el tipo de socket/conexion
+		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		port = 1332 # Puerto de comunicacion
+
+		# Realizamos la conexion al la IP y puerto
+		sock.connect(('192.168.2.11',port))
+
+		# Send data to server
+		data = "abrisoyyo"
+		sock.send(data.encode())
+
+		# Cerramos el socket
+		sock.close()
+	else:
+		context.bot.send_message(chat_id = update.message.chat_id, text = "🤷🏻‍♂️Lo siento, no tenes permisos para esta acción.", parse_mode=ParseMode.HTML)
 
 
 def ambiente(update, context):
@@ -202,6 +226,7 @@ def main():
 	dp.add_handler(CommandHandler('suerte', suerte))
 
 	dp.add_handler(CommandHandler('acciones', acciones))
+	dp.add_handler(CommandHandler('puerta', puerta))
 
 	dp.add_handler(CommandHandler('sensores', sensores))
 	dp.add_handler(CommandHandler('ambiente', ambiente))
