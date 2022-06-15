@@ -2,6 +2,8 @@ FROM python:3.8.12-slim
 
 WORKDIR /home/bot
 
+RUN mkdir audios_telegram
+
 RUN apt update && apt upgrade -y \ 
     && pip3 install --upgrade pip
     

@@ -1,0 +1,21 @@
+version: "1.25"
+
+volumes:
+  audios:
+
+services:
+  bot:
+    build: bot/.
+    container_name: bot
+    volumes:
+      - audios:/home/bot/audios_telegram
+    network_mode: host
+    
+
+  voice-assistant:
+    build: voice_assistant/.
+    container_name: voice-assistant
+    volumes:
+      - audios:/home/voice_assistant/audios_foxie
+    network_mode: host
+
