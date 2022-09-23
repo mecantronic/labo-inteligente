@@ -2,7 +2,6 @@ version: "1.25"
 
 volumes:
   audios:
-  mosquitto.conf:
 
 services:
   bot:
@@ -21,14 +20,12 @@ services:
     network_mode: host
 
   broker:
-    image: "eclipse-mosquitto"
-    container_name: mosquitto
+    image: eclipse-mosquitto
+    container_name: broker
     network_mode: host
     restart: always
     volumes:
-      - mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - /mosquitto/data
-      - /mosquitto/log
+      - /labo_inteligente/broker/mosquitto:/mosquitto
     ports:
       - "1883:1883"
       - "9000:9000"
