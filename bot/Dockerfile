@@ -7,6 +7,10 @@ RUN mkdir audios_telegram
 RUN apt update && apt upgrade -y \ 
     && pip3 install --upgrade pip
     
+RUN apt-get install mosquitto -y
+RUN apt-get install mosquitto-clients -y
+RUN apt-get install libmariadb-dev -y
+
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 

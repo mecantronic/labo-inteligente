@@ -3,3 +3,5 @@ python-telegram-bot
 python-dotenv
 requests
 datetime
+pandas
+mysql-connector-python
